@@ -30,8 +30,28 @@ int main() {
 
     #pragma omp parallel default(none) shared(v1, v2, v3, size, chunk_size) private(total)
     {
-        // Compute the vector addition with specified chunk size for scheduling
+        // Experiment with different scheduling techniques and chunk sizes
+
+        // Static scheduling with different chunk sizes
         #pragma omp for schedule(static, chunk_size)
+        for (int i = 0; i < size; i++) {
+            v3[i] = v1[i] + v2[i];
+        }
+
+        // Dynamic scheduling with different chunk sizes
+        #pragma omp for schedule(dynamic, chunk_size)
+        for (int i = 0; i < size; i++) {
+            v3[i] = v1[i] + v2[i];
+        }
+
+        // Guided scheduling with different chunk sizes
+        #pragma omp for schedule(guided, chunk_size)
+        for (int i = 0; i < size; i++) {
+            v3[i] = v1[i] + v2[i];
+        }
+
+        // Auto scheduling with different chunk sizes
+        #pragma omp for schedule(auto, chunk_size)
         for (int i = 0; i < size; i++) {
             v3[i] = v1[i] + v2[i];
         }
